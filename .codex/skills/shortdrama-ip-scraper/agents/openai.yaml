@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shortdrama IP Scraper"
+  short_description: "批量抓取短剧平台 IP 信息并导出表格数据"
+  default_prompt: "Use $shortdrama-ip-scraper to fetch all available IP records and export them as a table."

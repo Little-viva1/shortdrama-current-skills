@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(npm -v)",
+      "Bash(yarn -v)",
+      "Bash(where yarn:*)",
+      "Bash(corepack enable:*)",
+      "Bash(corepack prepare:*)",
+      "Bash(npm install:*)",
+      "Bash(yarn install:*)",
+      "Bash(yarn dev:*)",
+      "Bash(npm run:*)",
+      "Bash(npx nuxi:*)",
+      "Bash(netstat -ano)",
+      "WebSearch",
+      "WebFetch(domain:gpt-best.apifox.cn)",
+      "WebFetch(domain:wiki.bltcy.ai)",
+      "WebFetch(domain:bltcy.cn)"
+    ]
+  },
+  "redaction_note": "Original local command allowlist contained machine-specific paths and private API/auth keys. This GitHub copy keeps only reusable permission patterns; real local credentials must stay outside the repository."
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shortdrama Metrics"
+  short_description: "Fetch short-drama play metrics from copyright center APIs"
+  default_prompt: "Use this skill to locate a short drama in the copyright center and fetch overview or lifetime play metrics using external auth configuration."
