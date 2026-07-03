@@ -1,7 +1,7 @@
 # 短剧生产仓库定位与 source routing
 
-更新时间：2026-07-02
-状态：current routing draft，等待伟冬按实际导出习惯校准
+更新时间：2026-07-03
+状态：daily routing confirmed by WeiDong；图片资产仓已验证可访问，asset 状态索引待补齐
 
 ## 1. 适用仓库
 
@@ -22,7 +22,7 @@
 1. 本文件：确认仓库定位、导出字段和上传落点。
 2. 生产工具仓自己的当前入口：
    - StoryWeaver：优先读 `agent/worklogs/daily/`、`agent/worklogs/metrics/`、最近提交和工具 README。
-   - PJ Novel：优先读 `dashboard.md`、`portfolio.md`、`novels/*`、最近提交；若后续新增 `agent/worklogs/daily/`，以 daily worklog 为准。
+   - PJ Novel：优先读新建 daily md；`dashboard.md`、`portfolio.md`、`novels/*`、最近提交作为辅助索引。
 3. `shortdrama-current-state`：
    - `facts/production/current-production-flow-2026-07.md`
    - `ops/source-governance/storyweaver-pj-daily-sync-routing-2026-07.md`
@@ -34,8 +34,8 @@
 |---|---|---|---|
 | StoryWeaver run | 日期、作品/剧目、episode、shot id、阶段、生成次数、失败类型、reroll 次数、机器耗时、模型/供应商、现金成本、可用镜头数 | `sources/storyweaver-processed/YYYY-MM-DD-*.md/json`，汇总后进 `facts/production/` | 可共享处理后 trace；不上传原图/原视频/密钥/本机绝对路径 |
 | PJ Novel run | 日期、项目、文本阶段、EP 编号、输入来源、输出文件、改写轮次、人工介入点、阻塞、下一步 | `sources/pj-novel-processed/YYYY-MM-DD-*.md/json`，汇总后进 `facts/production/` | 可共享阶段和进度；原始版权文本、长篇未脱敏材料留在工具仓或 source-bound layer |
-| storyweaver-images | 图片 asset id、版本、对应 shot、是否通过审核、reroll 原因 | current-state 只存索引和状态；大图留图片仓或 NAS | GitHub current-state 不镜像图片本体 |
-| 播放/收益/结算后台 | 播放、有效播放、收益、扣减、可提现、平台、统计时间 | `sources/copyright-metrics-processed/`，汇总后进 `facts/commercial/` | 只存脱敏结构化数据和口径；后台截图原图、账号信息不进 GitHub |
+| storyweaver-images | 图片 asset id、版本、对应 shot、是否通过审核、reroll 原因 | current-state 只存索引和状态；大图留图片仓或 NAS | GitHub current-state 不镜像图片本体；`58164542/storyweaver-images` 当前已验证可访问，但仍需补 asset 状态索引 |
+| 播放/收益/结算后台 | 播放、有效播放、收益、扣减、可提现、平台、统计时间 | current-state 日报独立回传，并进入 `sources/copyright-metrics-processed/` / `facts/commercial/` | 只存脱敏结构化数据和口径；后台截图原图、账号信息不进 GitHub；不与 StoryWeaver / PJ Novel 工具 trace 混在一起 |
 | 会议/语音/日记反馈 | 审核结论、返工原因、owner 决策、下一步 | `sources/meetings-processed/` 或 `sources/human-feedback-processed/` | 只写处理后结论；不要求人额外填重表 |
 
 ## 4. 人工与机器要分开记
@@ -73,6 +73,14 @@
 
 ## 6. 不要 claim
 
+2026-07-03 伟冬已确认：
+
+- StoryWeaver 后续按 `agent/worklogs/daily/YYYY-MM-DD.md` 和 `agent/worklogs/metrics/YYYY-MM-DD.json` 做 daily trace。
+- PJ Novel 后续新建日报 md。
+- reroll 原因分类先用“角色不一致 / 画面质量 / 动作节奏 / 文本不适配 / 技术失败 / 审核风险”。
+- 播放、收益、结算用 current-state 日报独立回传，不和 StoryWeaver / PJ Novel 工具 trace 混在一起。
+- 图片资产仓伟冬侧已添加 collaborators；Vincent 接受邀请后，当前 CLI 已验证 `58164542/storyweaver-images` 可访问。仓库根目录包含 `images/`、`seedance-refs/`、`seedance-test/`，最新提交停在 2026-06-21。下一步仍需补 asset 审核状态/日报索引；不能只用图片文件存在推断通过/重 roll/废弃。
+
 除非 current-state 已经收到播放、收益、成本和可复核生产 trace，否则不要 claim：
 
 - 某部剧已经商业验证成功。
@@ -82,4 +90,3 @@
 - 机器时间等于人的时间成本。
 
 当前更稳妥的口径是：StoryWeaver / PJ Novel 已经从普通参考源升级为生产 trace source；是否能把“短剧两周 trial / 证据缺口”升级成具体剧目、播放、收益、成本状态，取决于日同步能否补齐真实产出、返工、发布时间、播放和结算证据。
-
